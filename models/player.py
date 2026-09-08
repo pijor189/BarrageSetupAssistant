@@ -1,8 +1,8 @@
 class Player:
-    def __init__(self, name: str, director: str, nation: str):
+    def __init__(self, name: str):
         self.name = name
-        self.director = director
-        self.nation = nation
+        self.director = None
+        self.nation = None
         self.special_cards = []
 
     def __repr__(self) -> str:

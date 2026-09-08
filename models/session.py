@@ -2,13 +2,13 @@ from random import sample
 
 from datetime import datetime
 
-from src.barrage.assets import Assets
-from src.barrage.player import Player
+from models.assets import Assets
+from models.player import Player
 
 
 class Session:
     def __init__(self):
-        self.date = datetime.today()
+        self.date = datetime.now().date()
         self.players = []
         self.turn_goals = []
         self.game_goals = []
@@ -21,8 +21,7 @@ class Session:
 
 
     def __repr__(self) -> str:
-        return (f"\tBarrage session\t\n"
-                f"Date:\t{self.date}\n"
+        return (f"Barrage session - {self.date}\n"
                 f"Turn goals:\t{self.turn_goals}\n"
                 f"Game goals:\t{self.game_goals}\n"
                 f"Dam on valleys:\t{self.valleys}\n"

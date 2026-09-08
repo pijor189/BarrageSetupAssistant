@@ -1,8 +1,8 @@
 import json
 
-from src.barrage.assets import Assets
-from src.barrage.director import Director
-from src.barrage.nation import Nation
+from models.assets import Assets
+from models.director import Director
+from models.nation import Nation
 
 
 class DataLoader:

@@ -1,60 +1,41 @@
 from random import shuffle
 
-from src.barrage.assets import Assets
-from src.barrage.data_loader import DataLoader
-from src.barrage.director import Director
-from src.barrage.nation import Nation
-from src.barrage.player import Player
-from src.barrage.session import Session
+from services.data_loader import DataLoader
+from models.player import Player
+from models.session import Session
+from exceptions.game_exceptions import NotValidNumberOfPlayersError
+
+ALLOWED_PLAYERS = 4
 
 
 def init_assets_and_create_game_session() -> Session:
     session = Session()
-
-    all_assets = DataLoader.load_assets("../../data/assets.json")
-
-    assets = Assets(
-        all_assets["turn_goals"],
-        all_assets["game_goals"],
-        all_assets["valleys"],
-        all_assets["hills"],
-        all_assets["mountains"],
-        all_assets["water_drops"],
-        all_assets["basic_contract"],
-        all_assets["national_contract"]
-    )
-
+    assets = DataLoader.load_assets("data/assets.json")
     session.set_assets(assets)
 
     return session
 
-def add_players(number: int) -> list[Player]:
+def add_players_to_game_session(number: int, session: Session) -> list[Player]:
+    if not isinstance(number, int) or number <= 0 or number > ALLOWED_PLAYERS:
+        raise NotValidNumberOfPlayersError
+
     players = []
     for index in range(1, number + 1):
         name = input("Give a name of player: ")
-        players.append(Player(name))
+        player = Player(name)
+        players.append(player)
+        session.add_player(player)
 
     return players
 
 def allocate_directors_and_nations_to_players(players: list[Player]) -> None:
-    all_directors = DataLoader.load_directors("../../data/directors.json")
-    all_nations = DataLoader.load_nations("../../data/nations.json")
+    directors = DataLoader.load_directors("data/directors.json")
+    nations = DataLoader.load_nations("data/nations.json")
 
-    directors = [
-        Director(
-            director["name"],
-            director["special_card"]
-        )
-        for director in all_directors
-        if len(players) == 1 and not director["special_card"]
-    ]
-    nations = [
-        Nation(
-            nation["name"],
-            nation["special_card"]
-        )
-        for nation in all_nations
-    ]
+    if len(players) == 1:
+        for director in directors.copy():
+            if director.special_card:
+                directors.remove(director)
 
     shuffle(directors)
     shuffle(nations)

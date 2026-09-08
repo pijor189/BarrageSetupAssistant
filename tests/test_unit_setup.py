@@ -76,17 +76,27 @@ def test_add_players_to_game_session_invalid(number_of_players):
     [1, 2, 4]
 )
 def test_allocate_directors_and_nations_to_players(number_of_players):
-    player = create_autospec(Player)
-    players = [player for _ in range(number_of_players)]
-    director = create_autospec(Director)
-    nation = create_autospec(Nation)
-    directors = [director for _ in range(7)]
-    nations = [nation for _ in range(4)]
+    players = [create_autospec(Player) for _ in range(number_of_players)]
+    expected_directors = [
+        create_autospec(Director)
+        for _ in range(7)
+    ]
+
+    expected_nations = [
+        create_autospec(Nation)
+        for _ in range(4)
+    ]
+
+    directors = expected_directors.copy()
+    nations = expected_nations.copy()
+
+    for director in directors:
+        director.special_card = False
 
     with (
             patch("services.data_loader.DataLoader.load_directors") as mock_load_directors,
             patch("services.data_loader.DataLoader.load_nations") as mock_load_nations,
-            patch("random.shuffle") as mock_shuffle
+            patch("services.setup.shuffle") as mock_shuffle
     ):
         mock_load_directors.return_value = directors
         mock_load_nations.return_value = nations
@@ -99,5 +109,5 @@ def test_allocate_directors_and_nations_to_players(number_of_players):
             [call(directors), call(nations)]
         )
 
-        assert [player.nation for player in players] == nation
-        assert [player.director for player in players] == director
+        assert [player.nation for player in players] == expected_nations[:number_of_players]
+        assert [player.director for player in players] == expected_directors[:number_of_players]

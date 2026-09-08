@@ -1,0 +1,58 @@
+{
+    "turn_goals": [
+      "tower",
+      "dam",
+      "power_plant",
+      "dam_upgrade",
+      "contracts",
+      "patents"
+    ],
+    "game_goals": [
+      "region_<",
+      "region_>",
+      "paid_>",
+      "buildings_>=3",
+      "buildings_>=1",
+      "building_complex"
+    ],
+    "valleys": [
+      "left",
+      "center",
+      "right"
+    ],
+    "hills": [
+      "left",
+      "center",
+      "right"
+    ],
+    "mountains": [
+      "left",
+      "center_left",
+      "center_right",
+      "right"
+    ],
+    "water_drops": [
+      "0012",
+      "0013",
+      "0121",
+      "2020",
+      "1022",
+      "1111",
+      "0220",
+      "0102"
+    ],
+    "basic_contract": [
+      "gold and energy",
+      "gold and resources",
+      "gold and key",
+      "gold"
+    ],
+    "national_contract": [
+      "points and key",
+      "points and gold",
+      "points and energy",
+      "points",
+      "points and water drops",
+      "points and resources"
+    ]
+}

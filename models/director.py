@@ -4,4 +4,4 @@ class Director:
         self.special_card = special_card
 
     def __repr__(self) -> str:
-        return f"{classmethod.__name__} {self.name}"
+        return f"Director {self.name}"

@@ -1,0 +1,22 @@
+[
+  {
+    "type": "nation",
+    "name": "America",
+    "special_card": false
+  },
+  {
+    "type": "nation",
+    "name": "Italy",
+    "special_card": false
+  },
+  {
+    "type": "nation",
+    "name": "Germany",
+    "special_card": false
+  },
+  {
+    "type": "nation",
+    "name": "France",
+    "special_card": false
+  }
+]
