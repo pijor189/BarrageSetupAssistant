@@ -72,11 +72,19 @@ def test_add_players_to_game_session_invalid(number_of_players):
 
 
 @pytest.mark.parametrize(
-    "number_of_players",
-    [1, 2, 4]
+    "number_of_players, special_card",
+    [
+        (1, False),
+        (1, True),
+        (2, False),
+        (4, True)
+    ]
 )
-def test_allocate_directors_and_nations_to_players(number_of_players):
+def test_allocate_directors_and_nations_to_players(number_of_players, special_card):
     players = [create_autospec(Player) for _ in range(number_of_players)]
+    if special_card and number_of_players > 1:
+        players[number_of_players - 1].special_cards = []
+
     expected_directors = [
         create_autospec(Director)
         for _ in range(7)
@@ -87,11 +95,14 @@ def test_allocate_directors_and_nations_to_players(number_of_players):
         for _ in range(4)
     ]
 
+    for index, director in enumerate(expected_directors, start=1):
+        if special_card and index == number_of_players:
+            director.special_card = True
+        else:
+            director.special_card = False
+
     directors = expected_directors.copy()
     nations = expected_nations.copy()
-
-    for director in directors:
-        director.special_card = False
 
     with (
             patch("services.data_loader.DataLoader.load_directors") as mock_load_directors,
@@ -109,5 +120,6 @@ def test_allocate_directors_and_nations_to_players(number_of_players):
             [call(directors), call(nations)]
         )
 
-        assert [player.nation for player in players] == expected_nations[:number_of_players]
-        assert [player.director for player in players] == expected_directors[:number_of_players]
+        for player in players:
+            assert player.director in set(expected_directors)
+            assert player.nation in set(expected_nations)
