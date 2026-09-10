@@ -29,5 +29,3 @@ try:
 except NotValidNumberOfPlayersError:
     print(f"You gave not valid number of players: {number_of_players}\n"
           f"Must be in range 1-4")
-
-

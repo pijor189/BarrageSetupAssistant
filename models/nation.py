@@ -4,4 +4,4 @@ class Nation:
         self.special_card = special_card
 
     def __repr__(self) -> str:
-        return f"Nation {self.name}"
+        return f"{self.name}"
