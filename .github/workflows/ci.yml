@@ -36,7 +36,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --maxfail=1 --disable-warnings -q --cov=./ --cov-report=xml --junitxml=report.xml
+          pytest --maxfail=1 --disable-warnings -q --cov=services --cov-report=xml --junitxml=report.xml
 
       - name: Upload test report (JUnit)
         uses: actions/upload-artifact@v4
