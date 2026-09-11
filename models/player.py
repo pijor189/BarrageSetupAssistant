@@ -24,7 +24,7 @@ class Player:
 
         # Add special cards if they exist
         if self.special_cards:
-            content += f"\n⭐ Special Cards:\n"
+            content += "\n⭐ Special Cards:\n"
             for card in self.special_cards:
                 content += f"  • {card}\n"
 

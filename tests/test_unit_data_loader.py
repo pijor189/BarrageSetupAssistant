@@ -1,9 +1,9 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
-from services.data_loader import DataLoader
 from models.assets import Assets
 from models.director import Director
 from models.nation import Nation
+from services.data_loader import DataLoader
 
 
 def test_load_assets():

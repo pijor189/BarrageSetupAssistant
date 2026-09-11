@@ -1,11 +1,9 @@
+from exceptions.game_exceptions import NotValidNumberOfPlayersError
 from services.setup import (
-    init_assets_and_create_game_session,
     add_players_to_game_session,
     allocate_directors_and_nations_to_players,
-    ALLOWED_PLAYERS
+    init_assets_and_create_game_session,
 )
-from exceptions.game_exceptions import NotValidNumberOfPlayersError
-
 
 try:
     print("Welcome in Barrage Setup Assistant\n\n")

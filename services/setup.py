@@ -1,9 +1,9 @@
 from random import shuffle
 
-from services.data_loader import DataLoader
+from exceptions.game_exceptions import NotValidNumberOfPlayersError
 from models.player import Player
 from models.session import Session
-from exceptions.game_exceptions import NotValidNumberOfPlayersError
+from services.data_loader import DataLoader
 
 ALLOWED_PLAYERS = 4
 

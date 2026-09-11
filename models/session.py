@@ -1,7 +1,8 @@
+from datetime import datetime, timezone
 from random import sample
-from datetime import datetime
-from rich.table import Table
+
 from rich.console import Console
+from rich.table import Table
 
 from models.assets import Assets
 from models.player import Player
@@ -9,7 +10,7 @@ from models.player import Player
 
 class Session:
     def __init__(self):
-        self.date = datetime.now().date()
+        self.date = datetime.now(timezone.utc).date().strftime("%d.%m.%Y")
         self.players = []
         self.turn_goals = []
         self.game_goals = []

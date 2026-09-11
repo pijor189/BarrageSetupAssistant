@@ -38,6 +38,10 @@ jobs:
         run: |
           pytest --maxfail=1 --disable-warnings -q --cov=services --cov-report=xml --junitxml=report.xml
 
+      - name: Lint with Ruff
+        run: |
+          ruff check . --output-format=github
+
       - name: Upload test report (JUnit)
         uses: actions/upload-artifact@v4
         with:

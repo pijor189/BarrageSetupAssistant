@@ -1,9 +1,8 @@
 import pytest
 
 from services.setup import (
-    init_assets_and_create_game_session,
     add_players_to_game_session,
-    allocate_directors_and_nations_to_players
+    init_assets_and_create_game_session,
 )
 
 

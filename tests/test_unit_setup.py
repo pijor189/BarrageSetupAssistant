@@ -1,18 +1,18 @@
+from unittest.mock import call, create_autospec, patch
+
 import pytest
 
-from unittest.mock import patch, create_autospec, call
-
+from exceptions.game_exceptions import NotValidNumberOfPlayersError
 from models.assets import Assets
-from models.session import Session
-from models.player import Player
 from models.director import Director
 from models.nation import Nation
+from models.player import Player
+from models.session import Session
 from services.setup import (
-    init_assets_and_create_game_session,
     add_players_to_game_session,
-    allocate_directors_and_nations_to_players
+    allocate_directors_and_nations_to_players,
+    init_assets_and_create_game_session,
 )
-from exceptions.game_exceptions import NotValidNumberOfPlayersError
 
 
 def test_init_assets_and_create_game_session():
